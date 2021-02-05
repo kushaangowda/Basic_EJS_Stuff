@@ -3,6 +3,8 @@ const logger = require("morgan"); // store info or logging
 const ejs = require("ejs");
 const bodyParser = require("body-parser"); // for post data
 
+var indexRouter = require("./routes/index");
+
 var port = process.env.PORT || 3000;
 
 //create instance of express app
@@ -23,9 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger("dev"));
 
 // // '/' stands for root url
-app.get("/", (req, res) => {
-	res.render("index.ejs");
-});
+app.use("/", indexRouter);
 
 app.use(function (req, res, next) {
 	res.status(404).render("404error.ejs");
